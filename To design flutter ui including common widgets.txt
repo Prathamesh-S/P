@@ -1,0 +1,239 @@
+Exp 2 : To design flutter ui by including common widgets
+
+
+Part 1:
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+
+
+
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+
+        title: Text(widget.title),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+Part 2:
+: Create UI using Flutter widgets
+
+
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(
+  home: CollegeIdCard(),
+));
+class CollegeIdCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+        title: Text('College ID Card'),
+    centerTitle: true,
+    backgroundColor: Colors.deepPurple,
+    elevation: 0.0,
+    ),
+    body: Padding(
+    padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+    Center(
+    child: CircleAvatar(
+    radius: 60.0,
+    backgroundImage: AssetImage('img/picc.jpeg'),
+    ),
+    ),
+    Divider(
+    color: Colors.grey[800],
+    height: 60.0,
+    ),
+    Text(
+    'STUDENT NAME',
+    style: TextStyle(
+    color: Colors.grey,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 10.0),
+    Text(
+    'Tim ',
+    style: TextStyle(
+    color: Colors.deepPurple,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 30.0),
+    Text(
+    'COLLEGE ADDRESS',
+    style: TextStyle(
+    color: Colors.grey,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 10.0),
+    Text(
+    'BVCOE Kharghar, Navi Mumbai',
+    style: TextStyle(
+    color: Colors.deepPurple,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 30.0),
+    Text(
+    'CURRENT ACADEMIC YEAR',
+    style: TextStyle(
+    color: Colors.grey,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 10.0),
+    Text(
+    'TE - Information Technology',
+    style: TextStyle(
+    color: Colors.deepPurple,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 30.0),
+    Row(
+    children: <Widget>[
+    Icon(
+    Icons.email,
+    color: Colors.grey[400],
+    ),
+    SizedBox(width: 10.0),
+    Text(
+    'Noobplayer@gmail.com',
+    style: TextStyle(
+    color: Colors.grey[400],
+    fontSize: 18.0,
+    letterSpacing: 1.0,
+    ),
+    )
+    ],
+    ),
+    SizedBox(height: 30.0),
+    Row(
+    children: <Widget>[
+    Icon(
+    Icons.phone,
+    color: Colors.grey[400],
+    ),
+    SizedBox(width: 10.0),
+    Text(
+    '9996668880',
+    style: TextStyle(
+    color: Colors.grey[400],
+    fontSize: 18.0,
+    letterSpacing: 1.0,
+    ),
+    )
+    ],
+    ),
+    Divider(
+    color: Colors.grey[800],
+    height: 60.0,
+    ),
+    Text(
+    'Student Address',
+    style: TextStyle(
+    color: Colors.grey,
+    letterSpacing: 2.0,
+    ),
+    ),
+    SizedBox(height: 5.0),
+    Text(
+    '39 oak street',
+    style: TextStyle(
+    color: Colors.grey,
+    fontWeight: FontWeight.bold,
+    fontSize: 16.0,
+    letterSpacing: 2.0,
+    ),
+    ),
+    Divider(
+    color: Colors.grey[800],
+    height: 60.0,
+    ),
+    ],
+    ),
+    ),
+    );
+  }
+}

@@ -1,0 +1,344 @@
+Exp 3 : To create interactive form using form widget.
+
+
+import 'package:flutter/material.dart';
+
+	void main() => runApp(MyApp());
+
+	class MyApp extends StatelessWidget {
+	  @override
+	  Widget build(BuildContext context) {
+	    final appTitle = 'Flutter Form Demo';
+	    return MaterialApp(
+title: appTitle,
+	      home: Scaffold(
+	        appBar: AppBar(
+	          title: Text(appTitle),
+	        ),
+	        body: MyCustomForm(),
+	      ),
+	    );
+	  }
+	}
+	// Create a Form widget.
+	class MyCustomForm extends StatefulWidget {
+	  @override
+	  MyCustomFormState createState() {
+	    return MyCustomFormState();
+	  }
+	}
+	// Create a corresponding State class. This class holds data related to the form.
+	class MyCustomFormState extends State<MyCustomForm> {
+	  // Create a global key that uniquely identifies the Form widget
+	  // and allows validation of the form.
+	  final _formKey = GlobalKey<FormState>();
+
+	  @override
+	  Widget build(BuildContext context) {
+	    // Build a Form widget using the _formKey created above.
+	    return Form(
+	      key: _formKey,
+	      child: Column(
+	        crossAxisAlignment: CrossAxisAlignment.start,
+	        children: <Widget>[
+	          TextFormField(
+	            decoration: const InputDecoration(
+	              icon: const Icon(Icons.person),
+	              hintText: 'Enter your name',
+	              labelText: 'Name',
+	            ),
+	          ),
+	          TextFormField(
+	            decoration: const InputDecoration(
+	              icon: const Icon(Icons.phone),
+	              hintText: 'Enter a phone number',
+	              labelText: 'Phone',
+	            ),
+	          ),
+	          TextFormField(
+	            decoration: const InputDecoration(
+	            icon: const Icon(Icons.calendar_today),
+	            hintText: 'Enter your date of birth',
+	            labelText: 'Dob',
+	            ),
+	           ),
+	          new Container(
+	              padding: const EdgeInsets.only(left: 150.0, top: 40.0),
+	              child: new RaisedButton(
+	                child: const Text('Submit'),
+	                  onPressed: null,
+               )),
+	        ],
+	      ),
+	    );
+	  }
+}
+
+
+Now creating interactive form demo using form widget:
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const appTitle = 'Form Validation Demo';
+
+    return MaterialApp(
+      title: appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(appTitle),
+        ),
+        body: const MyCustomForm(),
+      ),
+    );
+  }
+}
+
+// Create a Form widget.
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({Key? key}) : super(key: key);
+
+  @override
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
+}
+
+// Create a corresponding State class.
+// This class holds data related to the form.
+class MyCustomFormState extends State<MyCustomForm> {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            // The validator receives the text that the user has entered.
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Validate returns true if the form is valid, or false otherwise.
+                if (_formKey.currentState!.validate()) {
+                  // If the form is valid, display a snackbar. In the real world,
+                  // you'd often call a server or save the information in a database.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
+                }
+              },
+              child: const Text('Submit'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+Interactive form (lots of info)
+Form_screen.dart  file
+
+import 'package:flutter/material.dart';
+class FormScreen extends StatefulWidget {
+@override
+State<StatefulWidget> createState() {
+return FormScreenState();
+}
+}
+class FormScreenState extends State<FormScreen> {
+String _name;
+String _email;
+String _password;
+String _url;
+String _phoneNumber;
+String _calories;
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+Widget _buildName() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Name'),
+maxLength: 50,
+validator: (String value) {
+if (value.isEmpty) {
+return 'Name is Required';
+}
+return null;
+},
+onSaved: (String value) {
+_name = value;
+},
+);
+}
+Widget _buildEmail() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Email'),
+validator: (String value) {
+
+if (value.isEmpty) {
+return 'Email is Required';
+}
+if (!RegExp(
+r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-
+]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+.hasMatch(value)) {
+return 'Please enter a valid email Address';
+}
+return null;
+},
+onSaved: (String value) {
+_email = value;
+},
+);
+}
+Widget _buildPassword() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Password'),
+keyboardType: TextInputType.visiblePassword,
+validator: (String value) {
+if (value.isEmpty) {
+return 'Password is Required';
+}
+return null;
+},
+onSaved: (String value) {
+_password = value;
+},
+);
+}
+Widget _builURL() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Url'),
+keyboardType: TextInputType.url,
+validator: (String value) {
+if (value.isEmpty) {
+return 'URL is Required';
+}
+return null;
+},
+
+onSaved: (String value) {
+_url = value;
+},
+);
+}
+Widget _buildPhoneNumber() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Phone number'),
+keyboardType: TextInputType.phone,
+validator: (String value) {
+if (value.isEmpty) {
+return 'Phone number is Required';
+}
+return null;
+},
+onSaved: (String value) {
+_url = value;
+},
+);
+}
+Widget _buildCalories() {
+return TextFormField(
+decoration: InputDecoration(labelText: 'Calories'),
+keyboardType: TextInputType.number,
+validator: (String value) {
+int calories = int.tryParse(value);
+if (calories == null || calories <= 0) {
+return 'Calories must be greater than 0';
+}
+return null;
+},
+onSaved: (String value) {
+_calories = value;
+},
+);
+}
+@override
+Widget build(BuildContext context) {
+return Scaffold(
+appBar: AppBar(title: Text("Form Demo")),
+body: SingleChildScrollView(
+child: Container(
+margin: EdgeInsets.all(24),
+child: Form(
+key: _formKey,
+child: Column(
+mainAxisAlignment: MainAxisAlignment.center,
+children: <Widget>[
+_buildName(),
+_buildEmail(),
+_buildPassword(),
+_builURL(),
+_buildPhoneNumber(),
+_buildCalories(),
+SizedBox(height: 100),
+RaisedButton(
+child: Text(
+'Submit',
+style: TextStyle(color: Colors.blue, fontSize: 16),
+),
+onPressed: () {
+if (!_formKey.currentState.validate()) {
+return;
+}
+_formKey.currentState.save();
+print(_name);
+print(_email);
+print(_phoneNumber);
+print(_url);
+print(_password);
+print(_calories);
+//Send to API
+},
+)
+],
+),
+),
+),
+),
+);
+}
+}
+
+
+main.dart  file
+
+import 'package:cwc_flutter/form_screen.dart';
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+@override
+Widget build(BuildContext context) {
+return MaterialApp(
+title: 'Interactive form',
+theme: ThemeData(
+primarySwatch: Colors.teal,
+),
+home: FormScreen(),
+);
+}
+}
+
